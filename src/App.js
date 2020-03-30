@@ -1,14 +1,9 @@
 import React from "react";
-import classes from "./App.module.scss";
-
-import Auth from "./containers/Auth/Auth";
+import dog from "./assests/images/dog.png";
+import "./App.module.scss";
 
 function App() {
-  return (
-    <div className={classes.App}>
-      <Auth />
-    </div>
-  );
+  return <div className="App"></div>;
 }
 
 export default App;
