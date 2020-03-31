@@ -1,0 +1,44 @@
+@import "../../../sass/vars";
+
+.Button {
+  outline: none;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 4px;
+
+  background-color: transparent;
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.Success {
+  border: $green 1px solid;
+
+  color: $green;
+}
+
+.Danger {
+  border: $red 1px solid;
+
+  color: $red;
+}
+
+.Success:hover {
+  color: white;
+  background: $green;
+}
+
+.Danger:hover {
+  background: $red;
+  color: white;
+}
+
+.Disabled {
+  border: $gray 1px solid;
+
+  color: white;
+  background: $light-gray;
+}
