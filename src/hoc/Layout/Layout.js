@@ -14,12 +14,9 @@ const Layout = props => {
 
   return (
     <div className={classes.Layout}>
-      {props.isAuth ? (
-        <>
-          <Toolbar clicked={sideDrawerToggleHandler} open={open} />
-        </>
-      ) : null}
+      {props.isAuth ? <></> : null}
 
+      <Toolbar clicked={sideDrawerToggleHandler} open={open} />
       <main className={classes.Main}>{props.children}</main>
     </div>
   );

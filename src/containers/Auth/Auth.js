@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from "./Auth.module.css";
+import classes from "./Auth.module.scss";
 
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
@@ -8,7 +8,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 // import { Redirect } from "react-router-dom";
 // import { connect } from "react-redux";
 // import * as ActionCreator from "../../store/actions/";
-// import { updatedObject, validation } from "../../shared/utility";
+import { updatedObject, validation } from "../../shared/utility";
 
 export class Auth extends Component {
   constructor(props) {
@@ -52,26 +52,31 @@ export class Auth extends Component {
 
   formHandle = (event, inputType) => {
     const value = event.target.value;
-    // const updatedControls = updatedObject(this.state.controls, {
-    //   [inputType]: {
-    //     ...this.state.controls[inputType],
-    //     touched: true,
-    //     value: value,
-    //     valid: validation(value, this.state.controls[inputType].validation)
-    //   }
-    // });
-    // this.setState({
-    //   controls: updatedControls
-    // });
+    console.log(value);
+    const updatedControls = updatedObject(this.state.controls, {
+      [inputType]: {
+        ...this.state.controls[inputType],
+        touched: true,
+        value: value,
+        valid: validation(value, this.state.controls[inputType].validation)
+      }
+    });
+    this.setState({
+      controls: updatedControls
+    });
   };
 
   loginHandle = e => {
     e.preventDefault();
-    this.props.auth(
+    console.log(
       this.state.controls.email.value,
-      this.state.controls.password.value,
-      this.state.isSignUp
+      this.state.controls.password.value
     );
+    // this.props.auth(
+    //   this.state.controls.email.value,
+    //   this.state.controls.password.value,
+    //   this.state.isSignUp
+    // );
   };
 
   switchHandle = e => {
@@ -104,9 +109,11 @@ export class Auth extends Component {
             />
           );
         })}
+
         <Button type="Success" clicked={this.loginHandle}>
           {this.state.isSignUp ? "Sign up" : "Sign in"}
         </Button>
+
         <button className={classes.SwitchButton} onClick={this.switchHandle}>
           Switch to {this.state.isSignUp ? "sign in" : "sign up"}
         </button>
@@ -130,7 +137,9 @@ export class Auth extends Component {
     return (
       <div className={classes.Auth}>
         {/* {this.props.isAuth ? <Redirect to="/" /> : null} */}
+
         {errorMessage}
+
         <div className={classes.Icon}>
           <h2 className={classes.Title}>
             {this.state.isSignUp ? "Sign up" : "Sign in"}
