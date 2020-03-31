@@ -87,7 +87,7 @@ export class Auth extends Component {
   };
 
   render() {
-    console.log(this.props.loading);
+    console.log(this.props.user);
     let controls = [];
     for (let elementType in this.state.controls) {
       controls.push({
@@ -151,12 +151,14 @@ export class Auth extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.auth.loading
+  loading: state.auth.loading,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    auth: () => dispatch(authActionCreator())
+    auth: (email, password, isSignUp) =>
+      dispatch(authActionCreator(email, password, isSignUp))
   };
 };
 
