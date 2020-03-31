@@ -6,8 +6,8 @@ import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 // import { Redirect } from "react-router-dom";
-// import { connect } from "react-redux";
-// import * as ActionCreator from "../../store/actions/";
+import { connect } from "react-redux";
+import authActionCreator from "../../redux/actions/auth";
 import { updatedObject, validation } from "../../shared/utility";
 
 export class Auth extends Component {
@@ -52,7 +52,7 @@ export class Auth extends Component {
 
   formHandle = (event, inputType) => {
     const value = event.target.value;
-    console.log(value);
+
     const updatedControls = updatedObject(this.state.controls, {
       [inputType]: {
         ...this.state.controls[inputType],
@@ -61,6 +61,7 @@ export class Auth extends Component {
         valid: validation(value, this.state.controls[inputType].validation)
       }
     });
+
     this.setState({
       controls: updatedControls
     });
@@ -68,15 +69,12 @@ export class Auth extends Component {
 
   loginHandle = e => {
     e.preventDefault();
-    console.log(
-      this.state.controls.email.value,
-      this.state.controls.password.value
+
+    this.props.auth(
+      "sdsd@gmail.com",
+      this.state.controls.password.value,
+      this.state.isSignUp
     );
-    // this.props.auth(
-    //   this.state.controls.email.value,
-    //   this.state.controls.password.value,
-    //   this.state.isSignUp
-    // );
   };
 
   switchHandle = e => {
@@ -89,6 +87,7 @@ export class Auth extends Component {
   };
 
   render() {
+    console.log(this.props.loading);
     let controls = [];
     for (let elementType in this.state.controls) {
       controls.push({
@@ -151,18 +150,14 @@ export class Auth extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     loading: state.authStore.loading,
-//     error: state.authStore.error,
-//     isAuth: state.authStore.token !== null
-//   };
-// };
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     auth: (email, password, isSignUp) =>
-//       dispatch(ActionCreator.auth(email, password, isSignUp))
-//   };
-// };
+const mapStateToProps = state => ({
+  loading: state.auth.loading
+});
 
-export default Auth;
+const mapDispatchToProps = dispatch => {
+  return {
+    auth: () => dispatch(authActionCreator())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
