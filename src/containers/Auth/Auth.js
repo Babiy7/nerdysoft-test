@@ -5,7 +5,7 @@ import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import authActionCreator from "../../redux/actions/auth";
 import { updatedObject, validation } from "../../shared/utility";
@@ -71,7 +71,7 @@ export class Auth extends Component {
     e.preventDefault();
 
     this.props.auth(
-      "sdsd@gmail.com",
+      this.state.controls.email.value,
       this.state.controls.password.value,
       this.state.isSignUp
     );
@@ -87,8 +87,13 @@ export class Auth extends Component {
   };
 
   render() {
-    console.log(this.props.user);
     let controls = [];
+
+    console.log(this.props.error);
+    if (this.props.user) {
+      return <Redirect to="/" />;
+    }
+
     for (let elementType in this.state.controls) {
       controls.push({
         id: elementType,
@@ -128,15 +133,13 @@ export class Auth extends Component {
     if (this.props.error) {
       errorMessage = (
         <div className={classes.ErrorContent}>
-          <p>{this.props.error.message}</p>
+          <p>{this.props.error}</p>
         </div>
       );
     }
 
     return (
       <div className={classes.Auth}>
-        {/* {this.props.isAuth ? <Redirect to="/" /> : null} */}
-
         {errorMessage}
 
         <div className={classes.Icon}>
@@ -152,7 +155,8 @@ export class Auth extends Component {
 
 const mapStateToProps = state => ({
   loading: state.auth.loading,
-  user: state.auth.user
+  user: state.auth.user,
+  error: state.auth.error
 });
 
 const mapDispatchToProps = dispatch => {
