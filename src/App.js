@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./App.module.scss";
 
 import { Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { isLogin } from "./redux/actions/auth";
 
 import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
 import Tasks from "./components/Sections/Tasks/Tasks";
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.isAuth();
+  }, []);
+
   return (
     <div className={classes.App}>
       <Layout>
@@ -18,4 +24,10 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    isAuth: () => dispatch(isLogin())
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);

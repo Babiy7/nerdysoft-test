@@ -11,6 +11,11 @@ const register = (user, users) => ({
   payload: { user, users }
 });
 
+const islogin = (user, users) => ({
+  type: Types.REGISTER_AUTH,
+  payload: { user, users }
+});
+
 const error = errorMessage => ({
   type: Types.ERROR_AUTH,
   payload: errorMessage
@@ -39,7 +44,7 @@ function authLogin(user, users, dispatch) {
   }
 }
 
-function auth(email, password, isSignUp) {
+export function auth(email, password, isSignUp) {
   return dispatch => {
     dispatch({ type: Types.LOADING_AUTH });
 
@@ -54,6 +59,17 @@ function auth(email, password, isSignUp) {
       authRegister(user, users, dispatch);
     } else {
       authLogin(user, users, dispatch);
+    }
+  };
+}
+
+export function isLogin() {
+  return dispatch => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const users = JSON.parse(localStorage.getItem("users"));
+
+    if (user) {
+      dispatch(islogin(user, users));
     }
   };
 }

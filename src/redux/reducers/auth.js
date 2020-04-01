@@ -27,6 +27,22 @@ const register = (state, payload) =>
     users: payload.users
   });
 
+const isLogin = (state, payload) =>
+  updatedObject(state, {
+    loading: false,
+    error: undefined,
+    user: payload.user,
+    users: payload.users
+  });
+
+const logout = state =>
+  updatedObject(state, {
+    loading: false,
+    error: undefined,
+    user: null,
+    users: null
+  });
+
 const error = (state, payload) =>
   updatedObject(state, {
     loading: false,
@@ -55,6 +71,18 @@ function auth(state = initState, { type, payload }) {
 
     case Types.ERROR_AUTH: {
       state = error(state, payload);
+
+      return state;
+    }
+
+    case Types.ISLOGIN_AUTH: {
+      state = isLogin(state, payload);
+
+      return state;
+    }
+
+    case Types.LOGOUT_AUTH: {
+      state = logout(state);
 
       return state;
     }
