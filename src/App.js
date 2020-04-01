@@ -7,6 +7,7 @@ import { isLogin } from "./redux/actions/auth";
 
 import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
+import Logout from "./containers/Auth/Logout/Logout";
 import Tasks from "./components/Sections/Tasks/Tasks";
 
 function App(props) {
@@ -19,6 +20,7 @@ function App(props) {
       <Layout>
         <Route path="/" exact component={Tasks} />
         <Route path="/auth" component={Auth} />
+        <Route path="/logout" component={Logout} />
       </Layout>
     </div>
   );

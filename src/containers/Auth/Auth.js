@@ -89,7 +89,6 @@ export class Auth extends Component {
   render() {
     let controls = [];
 
-    console.log(this.props.error);
     if (this.props.user) {
       return <Redirect to="/" />;
     }

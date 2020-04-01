@@ -1,6 +1,8 @@
 import * as Types from "../ActionTypes";
 import { isRegister, authOperation } from "../../shared/utility";
 
+const loading = () => ({ type: Types.LOADING_AUTH });
+
 const login = (user, users) => ({
   type: Types.LOGIN_AUTH,
   payload: { user, users }
@@ -46,7 +48,7 @@ function authLogin(user, users, dispatch) {
 
 export function auth(email, password, isSignUp) {
   return dispatch => {
-    dispatch({ type: Types.LOADING_AUTH });
+    dispatch(loading());
 
     const users = JSON.parse(localStorage.getItem("users"));
     const user = {
@@ -71,6 +73,13 @@ export function isLogin() {
     if (user) {
       dispatch(islogin(user, users));
     }
+  };
+}
+
+export function logout() {
+  return dispatch => {
+    localStorage.setItem("user", JSON.stringify(null));
+    dispatch({ type: Types.LOGOUT_AUTH });
   };
 }
 
