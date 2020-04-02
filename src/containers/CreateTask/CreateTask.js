@@ -35,6 +35,10 @@ const CreateTask = props => {
 
   let content = null;
   let controls = [];
+  const config = state.configuration;
+  const title = config.title.value;
+  const description = config.description.value;
+  const disabled = title.length > 0 && description.length > 0;
 
   for (let key in state.configuration) {
     controls.push({ key: key, configuration: state.configuration[key] });
@@ -57,17 +61,17 @@ const CreateTask = props => {
   function clickHandler(e) {
     e.preventDefault();
 
-    const config = state.configuration;
-
     const task = {
       id: new Date().getTime(),
-      title: config.title.value,
-      description: config.description.value,
+      title: title,
+      description: description,
       createdBy: props.user.email,
       date: new Date()
     };
 
-    props.addTask(task, props.history);
+    if (title.length > 0 && description.length > 0) {
+      props.addTask(task, props.history);
+    }
   }
 
   content = (
@@ -81,7 +85,11 @@ const CreateTask = props => {
       ))}
 
       <div className={classes.ButtonContainer}>
-        <Button type="Success" clicked={e => clickHandler(e)}>
+        <Button
+          type="Success"
+          disabled={!disabled}
+          clicked={e => clickHandler(e)}
+        >
           Create
         </Button>
       </div>
