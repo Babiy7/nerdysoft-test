@@ -6,10 +6,13 @@ const NavigationItems = props => {
   return (
     <ul className={classes.NavigationItems}>
       <NavigationItem clicked={props.clicked} exact link="/">
-        Burger Builder
+        Tasks
       </NavigationItem>
-      <NavigationItem clicked={props.clicked} link="/orders">
-        Orders
+      <NavigationItem clicked={props.clicked} link="/my-tasks">
+        My tasks
+      </NavigationItem>
+      <NavigationItem clicked={props.clicked} link="/create">
+        Create task
       </NavigationItem>
       <NavigationItem clicked={props.clicked} link="/logout">
         Logout
