@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import classes from "./Auth.module.css";
+import classes from "./Auth.module.scss";
 
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
-// import { Redirect } from "react-router-dom";
-// import { connect } from "react-redux";
-// import * as ActionCreator from "../../store/actions/";
-// import { updatedObject, validation } from "../../shared/utility";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import authActionCreator from "../../redux/actions/auth";
+import { updatedObject, validation } from "../../shared/utility";
 
 export class Auth extends Component {
   constructor(props) {
@@ -52,21 +52,24 @@ export class Auth extends Component {
 
   formHandle = (event, inputType) => {
     const value = event.target.value;
-    // const updatedControls = updatedObject(this.state.controls, {
-    //   [inputType]: {
-    //     ...this.state.controls[inputType],
-    //     touched: true,
-    //     value: value,
-    //     valid: validation(value, this.state.controls[inputType].validation)
-    //   }
-    // });
-    // this.setState({
-    //   controls: updatedControls
-    // });
+
+    const updatedControls = updatedObject(this.state.controls, {
+      [inputType]: {
+        ...this.state.controls[inputType],
+        touched: true,
+        value: value,
+        valid: validation(value, this.state.controls[inputType].validation)
+      }
+    });
+
+    this.setState({
+      controls: updatedControls
+    });
   };
 
   loginHandle = e => {
     e.preventDefault();
+
     this.props.auth(
       this.state.controls.email.value,
       this.state.controls.password.value,
@@ -85,6 +88,11 @@ export class Auth extends Component {
 
   render() {
     let controls = [];
+
+    if (this.props.user) {
+      return <Redirect to="/" />;
+    }
+
     for (let elementType in this.state.controls) {
       controls.push({
         id: elementType,
@@ -104,9 +112,11 @@ export class Auth extends Component {
             />
           );
         })}
+
         <Button type="Success" clicked={this.loginHandle}>
           {this.state.isSignUp ? "Sign up" : "Sign in"}
         </Button>
+
         <button className={classes.SwitchButton} onClick={this.switchHandle}>
           Switch to {this.state.isSignUp ? "sign in" : "sign up"}
         </button>
@@ -122,15 +132,15 @@ export class Auth extends Component {
     if (this.props.error) {
       errorMessage = (
         <div className={classes.ErrorContent}>
-          <p>{this.props.error.message}</p>
+          <p>{this.props.error}</p>
         </div>
       );
     }
 
     return (
       <div className={classes.Auth}>
-        {/* {this.props.isAuth ? <Redirect to="/" /> : null} */}
         {errorMessage}
+
         <div className={classes.Icon}>
           <h2 className={classes.Title}>
             {this.state.isSignUp ? "Sign up" : "Sign in"}
@@ -142,18 +152,17 @@ export class Auth extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     loading: state.authStore.loading,
-//     error: state.authStore.error,
-//     isAuth: state.authStore.token !== null
-//   };
-// };
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     auth: (email, password, isSignUp) =>
-//       dispatch(ActionCreator.auth(email, password, isSignUp))
-//   };
-// };
+const mapStateToProps = state => ({
+  loading: state.auth.loading,
+  user: state.auth.user,
+  error: state.auth.error
+});
 
-export default Auth;
+const mapDispatchToProps = dispatch => {
+  return {
+    auth: (email, password, isSignUp) =>
+      dispatch(authActionCreator(email, password, isSignUp))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

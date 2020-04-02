@@ -1,10 +1,14 @@
+@import "../../sass/vars";
+
 .Auth {
   width: 400px;
+
   display: flex;
   flex-direction: column;
   border: #eee solid 1px;
   margin-bottom: 20px;
   padding: 50px 0 0 0;
+
   box-shadow: 0 4px 5px #ccc;
 }
 
@@ -15,35 +19,40 @@
 }
 
 .Title {
-  color: #ffb347;
+  color: $orange;
 }
 
 .Icon {
   width: 100%;
+
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
 }
 
 .SwitchButton {
-  border: none;
-  background: none;
   margin: 20px 0;
-  color: #ffb347;
+  border: none;
+
+  background: none;
+  color: $orange;
 }
 
 .SwitchButton:hover {
   border-bottom: black 1px solid;
+
   color: black;
 }
 
 .ErrorContent {
-  border: #ff6161 solid 1px;
-  background: #ff9191;
-  color: white;
-  border-radius: 10px;
   width: 340px;
-  margin: 0 auto;
+
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  border: $red solid 1px;
+  border-radius: 10px;
+
+  background: $light-red;
+  color: white;
 }

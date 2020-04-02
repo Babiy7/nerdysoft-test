@@ -3,7 +3,7 @@ import classes from "./Layout.module.scss";
 
 import Toolbar from "../../components/UI/Navigation/Toolbar/Toolbar";
 
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 
 const Layout = props => {
   const [open, setOpen] = useState(false);
@@ -14,10 +14,8 @@ const Layout = props => {
 
   return (
     <div className={classes.Layout}>
-      {props.isAuth ? (
-        <>
-          <Toolbar clicked={sideDrawerToggleHandler} open={open} />
-        </>
+      {props.user ? (
+        <Toolbar clicked={sideDrawerToggleHandler} open={open} />
       ) : null}
 
       <main className={classes.Main}>{props.children}</main>
@@ -25,10 +23,10 @@ const Layout = props => {
   );
 };
 
-// const mapStateToProps = state => {
-//   return {
-//     isAuth: state.authStore.token !== null
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
 
-export default Layout;
+export default connect(mapStateToProps)(Layout);
