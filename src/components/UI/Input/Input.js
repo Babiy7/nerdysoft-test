@@ -31,7 +31,13 @@ const Input = props => {
       break;
     }
     case "text-area": {
-      inputElement = <textarea className={classes.TextArea} {...props} />;
+      inputElement = (
+        <textarea
+          className={classes.TextArea}
+          onChange={props.changed}
+          {...props.configuration.elementConfig}
+        />
+      );
       break;
     }
     case "select": {
