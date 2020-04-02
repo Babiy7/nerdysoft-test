@@ -1,0 +1,58 @@
+@import "../../sass/vars";
+
+.Auth {
+  width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  border: #eee solid 1px;
+  margin-bottom: 20px;
+  padding: 50px 0 0 0;
+
+  box-shadow: 0 4px 5px #ccc;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Title {
+  color: $orange;
+}
+
+.Icon {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.SwitchButton {
+  margin: 20px 0;
+  border: none;
+
+  background: none;
+  color: $orange;
+}
+
+.SwitchButton:hover {
+  border-bottom: black 1px solid;
+
+  color: black;
+}
+
+.ErrorContent {
+  width: 340px;
+
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  border: $red solid 1px;
+  border-radius: 10px;
+
+  background: $light-red;
+  color: white;
+}
