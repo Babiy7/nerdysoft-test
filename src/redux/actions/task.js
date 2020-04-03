@@ -4,17 +4,36 @@ const loading = () => ({ type: Types.LOADING_TASK });
 
 const add = payload => ({ type: Types.CREATE_TASK, payload: payload });
 
+const init = payload => ({ type: Types.INIT_TASK, payload: payload });
+
 const error = errorMessage => ({
   type: Types.ERROR_TASK,
   payload: errorMessage
 });
 
-function addTask(task, history) {
-  return (dispatch, getState) => {
+export function initTasks() {
+  return dispatch => {
     dispatch(loading());
-    let tasks = getState().task.tasks;
 
-    tasks.push(task);
+    const tasks = JSON.parse(localStorage.getItem("tasks"));
+
+    setTimeout(() => {
+      dispatch(init(tasks));
+    }, 1000);
+  };
+}
+
+function addTask({ task, history }) {
+  return dispatch => {
+    dispatch(loading());
+
+    let tasks = JSON.parse(localStorage.getItem("tasks"));
+
+    if (tasks === null) {
+      tasks = [];
+    }
+
+    tasks.unshift(task);
 
     setTimeout(() => {
       localStorage.setItem("tasks", JSON.stringify(tasks));

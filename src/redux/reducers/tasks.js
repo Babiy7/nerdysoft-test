@@ -3,7 +3,7 @@ import { updatedObject } from "../../shared/utility";
 
 const initState = {
   loading: false,
-  tasks: [{ id: "fsdfs", title: "Owen" }],
+  tasks: [],
   error: undefined
 };
 
@@ -17,13 +17,20 @@ const create = (state, payload) =>
     error: undefined
   });
 
+const init = (state, payload) =>
+  updatedObject(state, {
+    loading: false,
+    tasks: payload,
+    error: undefined
+  });
+
 const error = (state, payload) =>
   updatedObject(state, {
     loading: false,
     error: payload
   });
 
-function auth(state = initState, { type, payload }) {
+function tasks(state = initState, { type, payload }) {
   switch (type) {
     case Types.LOADING_TASK: {
       state = loading(state);
@@ -32,8 +39,13 @@ function auth(state = initState, { type, payload }) {
     }
 
     case Types.CREATE_TASK: {
-      console.log(payload);
       state = create(state, payload);
+
+      return state;
+    }
+
+    case Types.INIT_TASK: {
+      state = init(state, payload);
 
       return state;
     }
@@ -50,4 +62,4 @@ function auth(state = initState, { type, payload }) {
   }
 }
 
-export default auth;
+export default tasks;

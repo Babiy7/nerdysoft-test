@@ -36,7 +36,7 @@ export function isRegister(user1, user2) {
 }
 
 // if user exist returns true
-export function authOperation(user, users, isCorectData) {
+export function authOperation(user, users = [], isCorectData) {
   for (let i = 0; i < users.length; i++) {
     const registerUser = users[i];
 

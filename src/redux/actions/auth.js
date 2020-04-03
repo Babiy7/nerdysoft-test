@@ -50,12 +50,16 @@ export function auth(email, password, isSignUp) {
   return dispatch => {
     dispatch(loading());
 
-    const users = JSON.parse(localStorage.getItem("users"));
+    let users = JSON.parse(localStorage.getItem("users"));
     const user = {
       email: email,
       password: password,
       tasks: []
     };
+
+    if (users === null) {
+      users = [];
+    }
 
     if (isSignUp) {
       authRegister(user, users, dispatch);
