@@ -7,7 +7,7 @@ import { initTasks } from "../../../redux/actions/task";
 
 import Spinner from "../../UI/Spinner/Spinner";
 
-const Tasks = props => {
+const Tasks = (props) => {
   useEffect(() => {
     props.init();
   }, []);
@@ -23,7 +23,7 @@ const Tasks = props => {
   }
 
   if (props.tasks) {
-    content = props.tasks.map(task => {
+    content = props.tasks.map((task) => {
       return <li>{task.title}</li>;
     });
   }
@@ -35,13 +35,13 @@ const Tasks = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.auth.user,
   tasks: state.task.tasks,
-  loading: state.task.loading
+  loading: state.task.loading,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return { init: () => dispatch(initTasks()) };
 };
 

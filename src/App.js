@@ -28,9 +28,9 @@ function App(props) {
   );
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    isAuth: () => dispatch(isLogin())
+    isAuth: () => dispatch(isLogin()),
   };
 };
 
