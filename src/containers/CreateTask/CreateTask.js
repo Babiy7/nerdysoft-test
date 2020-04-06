@@ -8,29 +8,29 @@ import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
-const CreateTask = props => {
+const CreateTask = (props) => {
   const [state, setState] = useState({
     configuration: {
       title: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Type task's name"
+          placeholder: "Type task's name",
         },
 
-        value: ""
+        value: "",
       },
       description: {
         elementType: "text-area",
         elementConfig: {
           type: "text",
-          placeholder: "Type description of task..."
+          placeholder: "Type description of task...",
         },
 
-        value: ""
-      }
+        value: "",
+      },
     },
-    tasks: []
+    tasks: [],
   });
 
   let content = null;
@@ -52,9 +52,9 @@ const CreateTask = props => {
         ...state.configuration,
         [key]: {
           ...state.configuration[key],
-          value: value
-        }
-      }
+          value: value,
+        },
+      },
     });
   }
 
@@ -66,7 +66,7 @@ const CreateTask = props => {
       title: title,
       description: description,
       createdBy: props.user.email,
-      date: new Date()
+      date: new Date(),
     };
 
     if (title.length > 0 && description.length > 0) {
@@ -76,10 +76,10 @@ const CreateTask = props => {
 
   content = (
     <form className={classes.Form}>
-      {controls.map(control => (
+      {controls.map((control) => (
         <Input
           key={control.key}
-          changed={e => changeHandler(e, control.key)}
+          changed={(e) => changeHandler(e, control.key)}
           configuration={control.configuration}
         />
       ))}
@@ -88,7 +88,7 @@ const CreateTask = props => {
         <Button
           type="Success"
           disabled={!disabled}
-          clicked={e => clickHandler(e)}
+          clicked={(e) => clickHandler(e)}
         >
           Create
         </Button>
@@ -100,20 +100,24 @@ const CreateTask = props => {
     content = <Spinner />;
   }
 
-  return <div className={classes.CreateTask}>{content}</div>;
+  return (
+    <div className={classes.CreateTask}>
+      <div className={classes.Container}>{content}</div>
+    </div>
+  );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     loading: state.task.loading,
     user: state.auth.user,
-    tasks: state.task.tasks
+    tasks: state.task.tasks,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addTask: (task, history) => dispatch(addTask({ task, history }))
+    addTask: (task, history) => dispatch(addTask({ task, history })),
   };
 };
 

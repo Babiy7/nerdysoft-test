@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import { initTasks } from "../../../redux/actions/task";
 
 import Spinner from "../../UI/Spinner/Spinner";
-import Task from "../../Task/Task";
+import Task from "../../../containers/Task/Task";
 
 const Tasks = (props) => {
   useEffect(() => {

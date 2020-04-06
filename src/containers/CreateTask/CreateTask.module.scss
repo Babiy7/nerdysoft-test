@@ -1,24 +1,32 @@
 .CreateTask {
-  width: 100%;
-  max-width: 600px;
-  height: 300px;
+  height: 100vh;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 1rem;
 
-  box-shadow: 1px 1px 10px rgba(#000000, 0.4);
-
-  .Form {
+  .Container {
     width: 100%;
-    height: 100%;
+    max-width: 600px;
+    height: 300px;
 
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: auto;
 
-    .ButtonContainer {
-      display: flex;
-      justify-content: flex-end;
+    box-shadow: 1px 1px 10px rgba(#000000, 0.4);
+
+    .Form {
+      width: 100%;
+      height: 100%;
+
+      overflow: hidden;
+
+      .ButtonContainer {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
 }

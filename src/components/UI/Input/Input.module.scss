@@ -1,3 +1,5 @@
+@import "../../../sass/input";
+
 .Input {
   display: flex;
   flex-direction: column;
@@ -7,19 +9,8 @@
   margin-bottom: 10px;
 }
 
-.Label {
-  text-align: left;
-  margin: 0px 0px 10px 15px;
-}
-
 .InputElement {
-  width: 100%;
-  border: #ccc solid 1px;
-  padding: 10px 15px;
-  box-sizing: border-box;
-  margin: 0px auto;
-  outline: none;
-  border-radius: 16px;
+  @extend %input;
 }
 
 .Invalid {
