@@ -1,43 +1,94 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Task.module.scss";
 
+import { updatedState } from "../../shared/utility";
+
 import TaskComponent from "../../components/Task/Task";
-import Button from "../../components/UI/Button/Button";
+import EditComponet from "../../components/Edit/Edit";
 
-const Task = (props) => {
-  const [isEdit, setIsEdit] = useState(false);
-  const task = props.task;
-  let content;
+class Task extends React.Component {
+  state = {
+    configuration: {
+      title: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          value: "",
+          name: "title",
+        },
+      },
+      description: {
+        elementType: "text-area",
+        elementConfig: {
+          type: "text",
+          value: "",
+          name: "description",
+        },
+      },
+    },
 
-  const handleEdit = () => {
-    setIsEdit(!isEdit);
+    isEdit: false,
   };
 
-  content = (
-    <TaskComponent
-      title={task.title}
-      description={task.description}
-      createdBy={task.createdBy}
-      handleEdit={handleEdit}
-    />
-  );
+  componentDidMount() {
+    const task = this.props.task;
+    const configuration = this.state.configuration;
 
-  if (isEdit) {
-    content = (
-      <>
-        <div style={{ width: "100%" }} className={classes.Content}>
-          <input type="text" className={classes.Input} value={task.title} />
-          <textarea type="text" />
-        </div>
-
-        <Button type="Success" clicked={handleEdit}>
-          Edit
-        </Button>
-      </>
-    );
+    this.setState(updatedState(configuration, task));
   }
 
-  return content;
-};
+  handleEdit = () => {
+    this.setState((prevState) => {
+      return { isEdit: !prevState.isEdit };
+    });
+  };
+
+  handleChange = (e) => {
+    const configuration = this.state.configuration;
+    const value = e.target.value;
+    const name = e.target.name;
+
+    this.setState({
+      configuration: {
+        ...configuration,
+        [name]: {
+          ...configuration[name],
+          elementConfig: {
+            ...configuration[name].elementConfig,
+            value: value,
+          },
+        },
+      },
+    });
+  };
+
+  render() {
+    const task = this.props.task;
+    let content;
+
+    content = (
+      <TaskComponent
+        title={task.title}
+        description={task.description}
+        createdBy={task.createdBy}
+        handleEdit={this.handleEdit}
+      />
+    );
+
+    if (this.state.isEdit) {
+      content = (
+        <EditComponet
+          title={task.title}
+          description={task.description}
+          handleEdit={this.handleEdit}
+          configuration={this.state.configuration}
+          changed={this.handleChange}
+        />
+      );
+    }
+
+    return <div className={classes.Task}>{content}</div>;
+  }
+}
 
 export default Task;

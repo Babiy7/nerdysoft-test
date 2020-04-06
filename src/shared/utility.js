@@ -1,5 +1,26 @@
 export const updatedObject = (state, newValues) => ({ ...state, ...newValues });
 
+export const updatedState = (configuration, task) => {
+  return {
+    configuration: {
+      title: {
+        ...configuration.title,
+        elementConfig: {
+          ...configuration.title.elementConfig,
+          value: task.title,
+        },
+      },
+      description: {
+        ...configuration.description,
+        elementConfig: {
+          ...configuration.description.elementConfig,
+          value: task.description,
+        },
+      },
+    },
+  };
+};
+
 export const validation = (value, rules) => {
   let isValid = true;
 

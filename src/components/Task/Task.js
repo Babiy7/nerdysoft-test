@@ -3,7 +3,7 @@ import classes from "./Task.module.scss";
 
 const Task = (props) => {
   return (
-    <div className={classes.Task}>
+    <>
       <div className={classes.Content}>
         <h4 className={classes.Title} onClick={props.handleEdit}>
           {props.title}
@@ -20,7 +20,7 @@ const Task = (props) => {
         {/* <div className={classes.Date}>{props.date}</div> */}
       </div>
       <button className={classes.Delete} />
-    </div>
+    </>
   );
 };
 

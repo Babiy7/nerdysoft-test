@@ -23,8 +23,6 @@ const Tasks = (props) => {
     return <Spinner />;
   }
 
-  console.log(props.tasks);
-
   if (props.tasks) {
     content = props.tasks.map((task) => {
       return <Task key={task.id} task={task} />;
