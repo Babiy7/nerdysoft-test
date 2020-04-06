@@ -1,0 +1,7 @@
+%hover {
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: rgba(#000000, 0.1);
+  }
+}

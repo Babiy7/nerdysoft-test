@@ -1,0 +1,50 @@
+@import "../../sass/hover";
+
+.Task {
+  width: 500px;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem;
+
+  box-shadow: 1px 1px 10px rgba(#000000, 0.3);
+
+  .Content {
+    width: 95%;
+
+    .Title {
+      margin: 0;
+      padding: 0 0 0 10px;
+
+      font-size: 30px;
+
+      @extend %hover;
+    }
+
+    .Text {
+      height: 100%;
+
+      margin: 0;
+      padding: 0 0 0 10px;
+
+      font-size: 12px;
+
+      @extend %hover;
+    }
+  }
+
+  .Infromation {
+    display: flex;
+    justify-content: space-between;
+
+    color: rgba(#000000, 0.6);
+
+    font-size: 12px;
+
+    .CreatedBy {
+    }
+  }
+}

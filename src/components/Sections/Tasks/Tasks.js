@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import { initTasks } from "../../../redux/actions/task";
 
 import Spinner from "../../UI/Spinner/Spinner";
+import Task from "../../Task/Task";
 
 const Tasks = (props) => {
   useEffect(() => {
@@ -22,9 +23,11 @@ const Tasks = (props) => {
     return <Spinner />;
   }
 
+  console.log(props.tasks);
+
   if (props.tasks) {
     content = props.tasks.map((task) => {
-      return <li>{task.title}</li>;
+      return <Task key={task.id} task={task} />;
     });
   }
 
