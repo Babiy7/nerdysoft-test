@@ -3,6 +3,7 @@ import classes from "./CreateTask.module.scss";
 
 import { connect } from "react-redux";
 import addTask from "../../redux/actions/task";
+import { initDate } from "../../shared/date";
 
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
@@ -66,7 +67,7 @@ const CreateTask = (props) => {
       title: title,
       description: description,
       createdBy: props.user.email,
-      date: new Date(),
+      date: initDate(),
     };
 
     if (title.length > 0 && description.length > 0) {

@@ -4,30 +4,30 @@ import { updatedObject } from "../../shared/utility";
 const initState = {
   loading: false,
   tasks: [],
-  error: undefined
+  error: undefined,
 };
 
-const loading = state =>
+const loading = (state) =>
   updatedObject(state, { loading: true, error: undefined });
 
 const create = (state, payload) =>
   updatedObject(state, {
     loading: false,
     tasks: payload,
-    error: undefined
+    error: undefined,
   });
 
 const init = (state, payload) =>
   updatedObject(state, {
     loading: false,
     tasks: payload,
-    error: undefined
+    error: undefined,
   });
 
 const error = (state, payload) =>
   updatedObject(state, {
     loading: false,
-    error: payload
+    error: payload,
   });
 
 function tasks(state = initState, { type, payload }) {
@@ -38,7 +38,7 @@ function tasks(state = initState, { type, payload }) {
       return state;
     }
 
-    case Types.CREATE_TASK: {
+    case Types.SUCCESS_TASK: {
       state = create(state, payload);
 
       return state;

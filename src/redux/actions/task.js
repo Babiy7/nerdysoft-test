@@ -2,17 +2,17 @@ import * as Types from "../ActionTypes";
 
 const loading = () => ({ type: Types.LOADING_TASK });
 
-const add = payload => ({ type: Types.CREATE_TASK, payload: payload });
+const success = (payload) => ({ type: Types.SUCCESS_TASK, payload: payload });
 
-const init = payload => ({ type: Types.INIT_TASK, payload: payload });
+const init = (payload) => ({ type: Types.INIT_TASK, payload: payload });
 
-const error = errorMessage => ({
+const error = (errorMessage) => ({
   type: Types.ERROR_TASK,
-  payload: errorMessage
+  payload: errorMessage,
 });
 
 export function initTasks() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(loading());
 
     const tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -24,7 +24,7 @@ export function initTasks() {
 }
 
 function addTask({ task, history }) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(loading());
 
     let tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -37,9 +37,26 @@ function addTask({ task, history }) {
 
     setTimeout(() => {
       localStorage.setItem("tasks", JSON.stringify(tasks));
-      dispatch(add(tasks));
+      dispatch(success(tasks));
       history.push("/");
     }, 2000);
+  };
+}
+
+export function changeTask(title, description, id) {
+  return (dispatch) => {
+    dispatch(loading());
+
+    let tasks = JSON.parse(localStorage.getItem("tasks"));
+
+    let updatedTasks = tasks.map((task) => {
+      return task.id === id ? { ...task, title: title, description } : task;
+    });
+
+    setTimeout(() => {
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      dispatch(success(updatedTasks));
+    }, 500);
   };
 }
 
