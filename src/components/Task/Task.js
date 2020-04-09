@@ -19,7 +19,7 @@ const Task = (props) => {
         </div>
         <div className={classes.Date}>{props.date}</div>
       </div>
-      <button className={classes.Delete} />
+      <button onClick={() => props.deleted()} className={classes.Delete} />
     </>
   );
 };

@@ -3,7 +3,7 @@ import classes from "./Task.module.scss";
 
 import { updatedState } from "../../shared/utility";
 import { connect } from "react-redux";
-import { changeTask } from "../../redux/actions/task";
+import { changeTask, deleteTask } from "../../redux/actions/task";
 
 import TaskComponent from "../../components/Task/Task";
 import EditComponet from "../../components/Edit/Edit";
@@ -77,6 +77,12 @@ class Task extends React.Component {
     });
   };
 
+  handleDelete = () => {
+    const task = this.props.task;
+
+    this.props.delete(task.id);
+  };
+
   render() {
     const task = this.props.task;
     let content;
@@ -88,6 +94,7 @@ class Task extends React.Component {
         createdBy={task.createdBy}
         date={task.date}
         handleEdit={this.handleEdit}
+        deleted={this.handleDelete}
       />
     );
 
@@ -111,6 +118,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     change: (title, description, id) =>
       dispatch(changeTask(title, description, id)),
+    delete: (id) => dispatch(deleteTask(id)),
   };
 };
 
