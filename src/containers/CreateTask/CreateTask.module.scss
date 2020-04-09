@@ -1,8 +1,12 @@
 .CreateTask {
+  width: 100%;
   height: 100vh;
 
   display: flex;
   padding: 1rem;
+  margin: auto;
+
+  box-sizing: border-box;
 
   .Container {
     width: 100%;

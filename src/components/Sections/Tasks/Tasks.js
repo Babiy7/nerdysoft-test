@@ -20,20 +20,26 @@ const Tasks = (props) => {
   }
 
   if (props.loading) {
-    return <Spinner />;
+    return (
+      <div className={classes.Spinner}>
+        <Spinner />
+      </div>
+    );
   }
 
   if (props.tasks) {
-    content = props.tasks.map((task) => {
-      return <Task key={task.id} task={task} />;
-    });
+    content = (
+      <div className={classes.Tasks}>
+        <ul>
+          {props.tasks.map((task) => {
+            return <Task key={task.id} task={task} />;
+          })}
+        </ul>
+      </div>
+    );
   }
 
-  return (
-    <div className={classes.Tasks}>
-      <ul>{content}</ul>
-    </div>
-  );
+  return content;
 };
 
 const mapStateToProps = (state) => ({
