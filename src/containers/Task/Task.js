@@ -86,6 +86,7 @@ class Task extends React.Component {
         title={task.title}
         description={task.description}
         createdBy={task.createdBy}
+        date={task.date}
         handleEdit={this.handleEdit}
       />
     );

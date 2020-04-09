@@ -17,7 +17,7 @@ const Task = (props) => {
         <div className={classes.CreatedBy}>
           <span>Created by: </span> {props.createdBy}
         </div>
-        {/* <div className={classes.Date}>{props.date}</div> */}
+        <div className={classes.Date}>{props.date}</div>
       </div>
       <button className={classes.Delete} />
     </>
