@@ -9,6 +9,7 @@ import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
 import Tasks from "./components/Sections/Tasks/Tasks";
+import CreateTask from "./containers/CreateTask/CreateTask";
 
 function App(props) {
   useEffect(() => {
@@ -19,6 +20,7 @@ function App(props) {
     <div className={classes.App}>
       <Layout>
         <Route path="/" exact component={Tasks} />
+        <Route path="/create" component={CreateTask} />
         <Route path="/auth" component={Auth} />
         <Route path="/logout" component={Logout} />
       </Layout>
@@ -26,9 +28,9 @@ function App(props) {
   );
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    isAuth: () => dispatch(isLogin())
+    isAuth: () => dispatch(isLogin()),
   };
 };
 

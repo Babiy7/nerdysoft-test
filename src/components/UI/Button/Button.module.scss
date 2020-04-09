@@ -41,4 +41,11 @@
 
   color: white;
   background: $light-gray;
+
+  &:hover {
+    border: $gray 1px solid;
+
+    color: white;
+    background: $light-gray;
+  }
 }

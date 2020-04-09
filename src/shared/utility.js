@@ -1,5 +1,26 @@
 export const updatedObject = (state, newValues) => ({ ...state, ...newValues });
 
+export const updatedState = (configuration, task) => {
+  return {
+    configuration: {
+      title: {
+        ...configuration.title,
+        elementConfig: {
+          ...configuration.title.elementConfig,
+          value: task.title,
+        },
+      },
+      description: {
+        ...configuration.description,
+        elementConfig: {
+          ...configuration.description.elementConfig,
+          value: task.description,
+        },
+      },
+    },
+  };
+};
+
 export const validation = (value, rules) => {
   let isValid = true;
 
@@ -36,7 +57,7 @@ export function isRegister(user1, user2) {
 }
 
 // if user exist returns true
-export function authOperation(user, users, isCorectData) {
+export function authOperation(user, users = [], isCorectData) {
   for (let i = 0; i < users.length; i++) {
     const registerUser = users[i];
 

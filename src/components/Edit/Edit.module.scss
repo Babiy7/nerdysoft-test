@@ -1,0 +1,11 @@
+@import "../../sass/hover";
+@import "../../sass/input";
+
+.Content {
+  width: 100%;
+  height: 100%;
+
+  .Input {
+    @extend %input;
+  }
+}
