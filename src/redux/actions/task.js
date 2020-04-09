@@ -19,7 +19,7 @@ export function initTasks() {
 
     setTimeout(() => {
       dispatch(init(tasks));
-    }, 1000);
+    }, 500);
   };
 }
 
@@ -39,7 +39,7 @@ function addTask({ task, history }) {
       localStorage.setItem("tasks", JSON.stringify(tasks));
       dispatch(success(tasks));
       history.push("/");
-    }, 2000);
+    }, 500);
   };
 }
 
@@ -57,6 +57,18 @@ export function changeTask(title, description, id) {
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       dispatch(success(updatedTasks));
     }, 500);
+  };
+}
+
+export function deleteTask(id) {
+  return (dispatch) => {
+    dispatch(loading());
+    let tasks = JSON.parse(localStorage.getItem("tasks"));
+
+    let updatedTasks = tasks.filter((task) => task.id !== id);
+
+    dispatch(success(updatedTasks));
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 }
 
