@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "./Input.module.css";
+import classes from "./Input.module.scss";
 
-const Input = props => {
+const Input = (props) => {
   let inputElement = null;
 
   let inputClasses = [classes.InputElement];
@@ -31,13 +31,19 @@ const Input = props => {
       break;
     }
     case "text-area": {
-      inputElement = <textarea className={classes.TextArea} {...props} />;
+      inputElement = (
+        <textarea
+          className={classes.TextArea}
+          onChange={props.changed}
+          {...props.configuration.elementConfig}
+        />
+      );
       break;
     }
     case "select": {
       inputElement = (
         <select onChange={props.changed} className={classes.Select} {...props}>
-          {props.configuration.elementConfig.options.map(option => (
+          {props.configuration.elementConfig.options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.displayValue}
             </option>

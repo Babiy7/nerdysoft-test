@@ -1,0 +1,17 @@
+@import "../../sass/hover";
+@import "../../sass/input";
+
+.Task {
+  width: 500px;
+  height: 250px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem;
+
+  box-shadow: 1px 1px 10px rgba(#000000, 0.3);
+}

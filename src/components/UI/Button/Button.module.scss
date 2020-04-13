@@ -1,6 +1,8 @@
 @import "../../../sass/vars";
 
 .Button {
+  width: 100%;
+
   outline: none;
   padding: 10px;
   margin: 10px;
@@ -41,4 +43,11 @@
 
   color: white;
   background: $light-gray;
+
+  &:hover {
+    border: $gray 1px solid;
+
+    color: white;
+    background: $light-gray;
+  }
 }

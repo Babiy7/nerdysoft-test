@@ -1,0 +1,68 @@
+@import "../../sass/hover";
+@import "../../sass/input";
+
+.Content {
+  width: 95%;
+
+  .Title {
+    margin: 0;
+    padding: 0 0 0 10px;
+
+    font-size: 30px;
+
+    @extend %hover;
+  }
+
+  .Input {
+    @extend %input;
+  }
+
+  .Text {
+    height: 100%;
+
+    margin: 0;
+    padding: 0 0 0 10px;
+
+    font-size: 12px;
+
+    @extend %hover;
+  }
+}
+
+.Infromation {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  color: rgba(#000000, 0.6);
+
+  font-size: 12px;
+
+  .Description {
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.Delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  padding: 1.2rem;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+
+  background: none no-repeat center;
+  background-image: url("../../assests/icons/bin.svg");
+  background-size: 20px 20px;
+
+  @extend %hover;
+}
+
+span {
+  color: rgba(#000000, 0.8);
+}
