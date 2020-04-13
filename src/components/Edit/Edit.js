@@ -28,7 +28,11 @@ const Edit = (props) => {
       </div>
 
       <div className={classes.SelectBoxContainer}>
-        <SelectBox select={props.select} />
+        <SelectBox
+          users={props.users}
+          assignedHandler={props.assignedHandler}
+          task={props.task}
+        />
       </div>
 
       <div className={classes.ButtonContainer}>

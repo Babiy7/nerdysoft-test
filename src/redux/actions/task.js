@@ -43,12 +43,19 @@ function addTask({ task, history }) {
   };
 }
 
-export function changeTask(title, description, id) {
+export function changeTask(title, description, id, assignedTo) {
   return (dispatch) => {
     let tasks = JSON.parse(localStorage.getItem("tasks"));
 
     let updatedTasks = tasks.map((task) => {
-      return task.id === id ? { ...task, title: title, description } : task;
+      return task.id === id
+        ? {
+            ...task,
+            title: title,
+            descriptio: description,
+            assignedTo: assignedTo,
+          }
+        : task;
     });
 
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));

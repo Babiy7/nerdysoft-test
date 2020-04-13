@@ -6,10 +6,12 @@ const SelectBox = (props) => {
   const [selectedItem, setSelectedItem] = useState();
 
   useEffect(() => {
-    setSelectedItem(props.select.task.createdBy);
+    if (props.task) {
+      setSelectedItem(props.task.assignedTo);
+    } else {
+      setSelectedItem("no assigment");
+    }
   }, []);
-
-  console.log(props.select);
 
   return (
     <div className={classes.Item} onClick={() => setShowItems(!showItems)}>
@@ -26,18 +28,24 @@ const SelectBox = (props) => {
       {showItems ? (
         <div className={classes.List}>
           <div className={classes.Users}>
-            {props.select.users.map((user) => {
+            {props.users.map((user) => {
               const email = user.email;
               return (
                 <div
                   key={email}
                   className={classes.User}
-                  onClick={() => setSelectedItem(email)}
+                  style={{
+                    backgroundColor: email === selectedItem ? "#f2f2f2" : "",
+                  }}
+                  onClick={() => {
+                    setSelectedItem(email);
+                    props.assignedHandler(email);
+                  }}
                 >
                   {email}
                 </div>
               );
-            })}
+            }) || null}
           </div>
         </div>
       ) : null}

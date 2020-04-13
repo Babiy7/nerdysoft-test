@@ -7,6 +7,8 @@
     border: 1px solid #e0e0e0;
     padding-left: 1rem;
 
+    font-size: 1rem;
+
     transition: all 0.2s linear;
     box-sizing: border-box;
     cursor: pointer;
@@ -47,6 +49,8 @@
       .User {
         padding: 0.5rem 1rem;
         border-bottom: 1px solid #e0e0e0;
+
+        font-size: 1rem;
 
         z-index: 200;
         cursor: pointer;
