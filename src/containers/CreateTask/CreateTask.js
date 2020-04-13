@@ -8,6 +8,7 @@ import { initDate } from "../../shared/date";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import SelectBox from "../../components/SelectBox/SelectBox";
 
 const CreateTask = (props) => {
   const [state, setState] = useState({
@@ -32,6 +33,7 @@ const CreateTask = (props) => {
       },
     },
     tasks: [],
+    assignedTo: "no assigned",
   });
 
   let content = null;
@@ -45,7 +47,7 @@ const CreateTask = (props) => {
     controls.push({ key: key, configuration: state.configuration[key] });
   }
 
-  function changeHandler(e, key) {
+  const changeHandler = (e, key) => {
     const value = e.target.value;
     setState({
       ...state,
@@ -57,9 +59,9 @@ const CreateTask = (props) => {
         },
       },
     });
-  }
+  };
 
-  function clickHandler(e) {
+  const clickHandler = (e) => {
     e.preventDefault();
 
     const task = {
@@ -67,16 +69,22 @@ const CreateTask = (props) => {
       title: title,
       description: description,
       createdBy: props.user.email,
+      assignedTo: state.assignedTo,
       date: initDate(),
     };
 
     if (title.length > 0 && description.length > 0) {
       props.addTask(task, props.history);
     }
-  }
+  };
+
+  const assignedHandler = (email) => {
+    console.log(email);
+    setState({ ...state, assignedTo: email });
+  };
 
   content = (
-    <form className={classes.Form}>
+    <>
       {controls.map((control) => (
         <Input
           key={control.key}
@@ -84,6 +92,10 @@ const CreateTask = (props) => {
           configuration={control.configuration}
         />
       ))}
+
+      <div className={classes.SelectBoxContainer}>
+        <SelectBox users={props.users} assignedHandler={assignedHandler} />
+      </div>
 
       <div className={classes.ButtonContainer}>
         <Button
@@ -94,7 +106,7 @@ const CreateTask = (props) => {
           Create
         </Button>
       </div>
-    </form>
+    </>
   );
 
   if (props.loading) {
@@ -103,7 +115,9 @@ const CreateTask = (props) => {
 
   return (
     <div className={classes.CreateTask}>
-      <div className={classes.Container}>{content}</div>
+      <div className={classes.Container}>
+        <form className={classes.Form}>{content}</form>
+      </div>
     </div>
   );
 };
@@ -113,6 +127,7 @@ const mapStateToProps = (state) => {
     loading: state.task.loading,
     user: state.auth.user,
     tasks: state.task.tasks,
+    users: state.auth.users,
   };
 };
 

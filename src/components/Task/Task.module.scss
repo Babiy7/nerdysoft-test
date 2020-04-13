@@ -32,12 +32,17 @@
 .Infromation {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 
   color: rgba(#000000, 0.6);
 
   font-size: 12px;
 
-  .CreatedBy {
+  .Description {
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
   }
 }
 

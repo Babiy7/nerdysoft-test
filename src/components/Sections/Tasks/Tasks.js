@@ -14,6 +14,7 @@ const Tasks = (props) => {
   }, []);
 
   let content = null;
+  let tasks = props.tasks;
 
   if (!props.user) {
     return <Redirect to="/auth" />;
@@ -27,11 +28,17 @@ const Tasks = (props) => {
     );
   }
 
+  if (props.myTasks) {
+    tasks = props.tasks.filter((task) => {
+      return task.assignedTo === props.user.email;
+    });
+  }
+
   if (props.tasks) {
     content = (
       <div className={classes.Tasks}>
         <ul>
-          {props.tasks.map((task) => {
+          {tasks.map((task) => {
             return <Task key={task.id} task={task} />;
           })}
         </ul>

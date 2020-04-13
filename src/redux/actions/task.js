@@ -43,20 +43,23 @@ function addTask({ task, history }) {
   };
 }
 
-export function changeTask(title, description, id) {
+export function changeTask(title, description, id, assignedTo) {
   return (dispatch) => {
-    dispatch(loading());
-
     let tasks = JSON.parse(localStorage.getItem("tasks"));
 
     let updatedTasks = tasks.map((task) => {
-      return task.id === id ? { ...task, title: title, description } : task;
+      return task.id === id
+        ? {
+            ...task,
+            title: title,
+            descriptio: description,
+            assignedTo: assignedTo,
+          }
+        : task;
     });
 
-    setTimeout(() => {
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      dispatch(success(updatedTasks));
-    }, 500);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    dispatch(success(updatedTasks));
   };
 }
 

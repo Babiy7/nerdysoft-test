@@ -30,6 +30,8 @@ class Task extends React.Component {
     },
 
     isEdit: false,
+
+    assignedTo: "no assigned",
   };
 
   componentDidMount() {
@@ -39,26 +41,27 @@ class Task extends React.Component {
     this.setState(updatedState(configuration, task));
   }
 
-  handleChangeTask = () => {
+  сhangeTaskHandler = () => {
     const task = this.props.task;
     const configuration = this.state.configuration;
 
     this.props.change(
       configuration.title.elementConfig.value,
       configuration.description.elementConfig.value,
-      task.id
+      task.id,
+      this.state.assignedTo
     );
 
-    this.handleEdit();
+    this.editHandler();
   };
 
-  handleEdit = () => {
+  editHandler = () => {
     this.setState((prevState) => {
       return { isEdit: !prevState.isEdit };
     });
   };
 
-  handleChange = (e) => {
+  changeHandler = (e) => {
     const configuration = this.state.configuration;
     const value = e.target.value;
     const name = e.target.name;
@@ -77,10 +80,14 @@ class Task extends React.Component {
     });
   };
 
-  handleDelete = () => {
+  deleteHandler = () => {
     const task = this.props.task;
 
     this.props.delete(task.id);
+  };
+
+  assignedHandler = (email) => {
+    this.setState({ assignedTo: email });
   };
 
   render() {
@@ -89,23 +96,21 @@ class Task extends React.Component {
 
     content = (
       <TaskComponent
-        title={task.title}
-        description={task.description}
-        createdBy={task.createdBy}
-        date={task.date}
-        handleEdit={this.handleEdit}
-        deleted={this.handleDelete}
+        task={task}
+        handleEdit={this.editHandler}
+        deleted={this.deleteHandler}
       />
     );
 
     if (this.state.isEdit) {
       content = (
         <EditComponet
-          title={task.title}
-          description={task.description}
-          handleEdit={this.handleChangeTask}
+          task={task}
+          handleEdit={this.сhangeTaskHandler}
           configuration={this.state.configuration}
-          changed={this.handleChange}
+          changed={this.changeHandler}
+          assignedHandler={this.assignedHandler}
+          users={this.props.users}
         />
       );
     }
@@ -114,12 +119,18 @@ class Task extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    users: state.auth.users,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    change: (title, description, id) =>
-      dispatch(changeTask(title, description, id)),
+    change: (title, description, id, assignedTo) =>
+      dispatch(changeTask(title, description, id, assignedTo)),
     delete: (id) => dispatch(deleteTask(id)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Task);
+export default connect(mapStateToProps, mapDispatchToProps)(Task);
