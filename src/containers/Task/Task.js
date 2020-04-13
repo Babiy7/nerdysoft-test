@@ -31,7 +31,7 @@ class Task extends React.Component {
 
     isEdit: false,
 
-    assignedTo: "",
+    assignedTo: "no assigned",
   };
 
   componentDidMount() {

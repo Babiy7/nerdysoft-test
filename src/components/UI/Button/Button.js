@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Button.module.scss";
 
-const Button = props => {
+const Button = (props) => {
   let buttonClasses = [classes.Button, classes[props.type]];
 
   if (props.disabled) {

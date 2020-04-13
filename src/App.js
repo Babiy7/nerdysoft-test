@@ -20,6 +20,9 @@ function App(props) {
     <div className={classes.App}>
       <Layout>
         <Route path="/" exact component={Tasks} />
+        <Route path="/my-tasks">
+          <Tasks myTasks />
+        </Route>
         <Route path="/create" component={CreateTask} />
         <Route path="/auth" component={Auth} />
         <Route path="/logout" component={Logout} />

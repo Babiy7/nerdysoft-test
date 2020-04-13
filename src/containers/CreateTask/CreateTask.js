@@ -84,7 +84,7 @@ const CreateTask = (props) => {
   };
 
   content = (
-    <form className={classes.Form}>
+    <>
       {controls.map((control) => (
         <Input
           key={control.key}
@@ -106,7 +106,7 @@ const CreateTask = (props) => {
           Create
         </Button>
       </div>
-    </form>
+    </>
   );
 
   if (props.loading) {
@@ -115,7 +115,9 @@ const CreateTask = (props) => {
 
   return (
     <div className={classes.CreateTask}>
-      <div className={classes.Container}>{content}</div>
+      <div className={classes.Container}>
+        <form className={classes.Form}>{content}</form>
+      </div>
     </div>
   );
 };
