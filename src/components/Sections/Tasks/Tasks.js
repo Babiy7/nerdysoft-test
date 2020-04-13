@@ -28,7 +28,7 @@ const Tasks = (props) => {
     );
   }
 
-  if (props.myTasks) {
+  if (props.myTasks && props.tasks) {
     tasks = props.tasks.filter((task) => {
       return task.assignedTo === props.user.email;
     });
