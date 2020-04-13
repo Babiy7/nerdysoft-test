@@ -86,6 +86,7 @@ class Task extends React.Component {
   render() {
     const task = this.props.task;
     let content;
+    const select = { task: task, users: this.props.users };
 
     content = (
       <TaskComponent
@@ -106,6 +107,7 @@ class Task extends React.Component {
           handleEdit={this.handleChangeTask}
           configuration={this.state.configuration}
           changed={this.handleChange}
+          select={select}
         />
       );
     }
@@ -113,6 +115,12 @@ class Task extends React.Component {
     return <div className={classes.Task}>{content}</div>;
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.auth.users,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -122,4 +130,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Task);
+export default connect(mapStateToProps, mapDispatchToProps)(Task);

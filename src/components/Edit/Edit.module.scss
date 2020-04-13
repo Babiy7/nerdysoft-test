@@ -9,3 +9,13 @@
     @extend %input;
   }
 }
+
+.SelectBoxContainer {
+  z-index: 1;
+}
+
+.ButtonContainer {
+  width: 96%;
+
+  z-index: 0;
+}

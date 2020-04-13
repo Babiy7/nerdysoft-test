@@ -1,6 +1,8 @@
 @import "../../../sass/vars";
 
 .Button {
+  width: 100%;
+
   outline: none;
   padding: 10px;
   margin: 10px;
@@ -12,6 +14,7 @@
   font-weight: bold;
 
   cursor: pointer;
+  z-index: 0;
 }
 
 .Success {

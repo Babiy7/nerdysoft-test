@@ -3,6 +3,7 @@ import classes from "./Edit.module.scss";
 
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
+import SelectBox from "../SelectBox/SelectBox";
 
 const Edit = (props) => {
   const configuration = props.configuration;
@@ -26,9 +27,15 @@ const Edit = (props) => {
         })}
       </div>
 
-      <Button type="Success" clicked={props.handleEdit}>
-        Edit
-      </Button>
+      <div className={classes.SelectBoxContainer}>
+        <SelectBox select={props.select} />
+      </div>
+
+      <div className={classes.ButtonContainer}>
+        <Button type="Success" clicked={props.handleEdit}>
+          Edit
+        </Button>
+      </div>
     </>
   );
 };
