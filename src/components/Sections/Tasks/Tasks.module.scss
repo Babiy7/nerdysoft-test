@@ -8,9 +8,18 @@
 }
 
 .Tasks {
+  width: 100%;
+
   display: flex;
-  justify-content: center;
   padding-top: 60px;
 
   margin: 0 auto;
+
+  .List {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
 }

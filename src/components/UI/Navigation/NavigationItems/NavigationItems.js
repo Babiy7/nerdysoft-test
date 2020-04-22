@@ -1,8 +1,8 @@
 import React from "react";
-import classes from "./NavigationItems.module.css";
+import classes from "./NavigationItems.module.scss";
 import NavigationItem from "./NavigationItem/NavigationItem";
 
-const NavigationItems = props => {
+const NavigationItems = (props) => {
   return (
     <ul className={classes.NavigationItems}>
       <NavigationItem clicked={props.clicked} exact link="/">
