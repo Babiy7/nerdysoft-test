@@ -43,11 +43,11 @@ class Task extends React.Component {
 
   сhangeTaskHandler = () => {
     const task = this.props.task;
-    const configuration = this.state.configuration;
+    const { title, description } = this.state.configuration;
 
     this.props.change(
-      configuration.title.elementConfig.value,
-      configuration.description.elementConfig.value,
+      title.elementConfig.value,
+      description.elementConfig.value,
       task.id,
       this.state.assignedTo
     );

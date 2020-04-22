@@ -52,7 +52,7 @@ export function changeTask(title, description, id, assignedTo) {
         ? {
             ...task,
             title: title,
-            descriptio: description,
+            description: description,
             assignedTo: assignedTo,
           }
         : task;
