@@ -7,9 +7,7 @@ const Toolbar = (props) => (
   <div className={classes.Toolbar}>
     <h4 className={classes.Title}>Tasks </h4>
 
-    <ul className={classes.DesktopOnly}>
-      <NavigationItems />
-    </ul>
+    <NavigationItems />
   </div>
 );
 
