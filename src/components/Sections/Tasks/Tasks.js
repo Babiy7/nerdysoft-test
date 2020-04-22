@@ -37,7 +37,7 @@ const Tasks = (props) => {
   if (props.tasks) {
     content = (
       <div className={classes.Tasks}>
-        <ul>
+        <ul className={classes.List}>
           {tasks.map((task) => {
             return <Task key={task.id} task={task} />;
           })}
