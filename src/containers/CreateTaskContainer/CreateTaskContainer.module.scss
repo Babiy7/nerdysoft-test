@@ -1,10 +1,9 @@
 .CreateTask {
   width: 100%;
-  height: 100vh;
 
   display: flex;
   padding: 1rem;
-  margin: auto;
+  margin: 0 auto;
 
   box-sizing: border-box;
 
@@ -17,7 +16,8 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    margin: auto;
+    margin: 0 auto;
+    margin-top: 50px;
 
     box-shadow: 1px 1px 10px rgba(#000000, 0.4);
 

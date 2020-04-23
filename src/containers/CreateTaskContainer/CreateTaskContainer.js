@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./CreateTask.module.scss";
+import classes from "./CreateTaskContainer.module.scss";
 
 import { connect } from "react-redux";
 import addTask from "../../redux/actions/task";

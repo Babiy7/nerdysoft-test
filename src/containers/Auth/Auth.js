@@ -18,35 +18,35 @@ export class Auth extends Component {
         email: {
           validation: {
             type: "email",
-            required: true
+            required: true,
           },
           elementType: "input",
           errorMessage: "Incorect email address",
           elementConfig: {
             type: "email",
-            placeholder: "Type your email"
+            placeholder: "Type your email",
           },
           touched: false,
           value: "",
-          valid: false
+          valid: false,
         },
         password: {
           validation: {
             type: "password",
-            required: true
+            required: true,
           },
           elementType: "input",
           errorMessage: "Incorect password",
           elementConfig: {
             type: "password",
-            placeholder: "Type your password"
+            placeholder: "Type your password",
           },
           touched: false,
           value: "",
-          valid: false
-        }
+          valid: false,
+        },
       },
-      isSignUp: true
+      isSignUp: true,
     };
   }
 
@@ -58,16 +58,16 @@ export class Auth extends Component {
         ...this.state.controls[inputType],
         touched: true,
         value: value,
-        valid: validation(value, this.state.controls[inputType].validation)
-      }
+        valid: validation(value, this.state.controls[inputType].validation),
+      },
     });
 
     this.setState({
-      controls: updatedControls
+      controls: updatedControls,
     });
   };
 
-  loginHandle = e => {
+  loginHandle = (e) => {
     e.preventDefault();
 
     this.props.auth(
@@ -77,11 +77,11 @@ export class Auth extends Component {
     );
   };
 
-  switchHandle = e => {
+  switchHandle = (e) => {
     e.preventDefault();
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return {
-        isSignUp: !prevState.isSignUp
+        isSignUp: !prevState.isSignUp,
       };
     });
   };
@@ -96,26 +96,28 @@ export class Auth extends Component {
     for (let elementType in this.state.controls) {
       controls.push({
         id: elementType,
-        controls: this.state.controls[elementType]
+        controls: this.state.controls[elementType],
       });
     }
 
     let content = (
       <form className={classes.Form}>
-        {controls.map(element => {
+        {controls.map((element) => {
           return (
             <Input
               key={element.id}
-              changed={event => this.formHandle(event, element.id)}
+              changed={(event) => this.formHandle(event, element.id)}
               configuration={element.controls}
               invalid={!element.controls.valid}
             />
           );
         })}
 
-        <Button type="Success" clicked={this.loginHandle}>
-          {this.state.isSignUp ? "Sign up" : "Sign in"}
-        </Button>
+        <div className={classes.ButtonContainer}>
+          <Button type="Success" clicked={this.loginHandle}>
+            {this.state.isSignUp ? "Sign up" : "Sign in"}
+          </Button>
+        </div>
 
         <button className={classes.SwitchButton} onClick={this.switchHandle}>
           Switch to {this.state.isSignUp ? "sign in" : "sign up"}
@@ -152,16 +154,16 @@ export class Auth extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loading: state.auth.loading,
   user: state.auth.user,
-  error: state.auth.error
+  error: state.auth.error,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     auth: (email, password, isSignUp) =>
-      dispatch(authActionCreator(email, password, isSignUp))
+      dispatch(authActionCreator(email, password, isSignUp)),
   };
 };
 

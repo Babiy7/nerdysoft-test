@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Task.module.scss";
+import classes from "./TaskContainer.module.scss";
 
 import { updatedState } from "../../shared/utility";
 import { connect } from "react-redux";
