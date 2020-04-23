@@ -9,7 +9,7 @@ import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
 import Tasks from "./components/Sections/Tasks/Tasks";
-import CreateTask from "./containers/CreateTask/CreateTask";
+import CreateTask from "./containers/CreateTaskContainer/CreateTaskContainer";
 
 function App(props) {
   useEffect(() => {
