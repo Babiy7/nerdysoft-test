@@ -16,6 +16,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .ButtonContainer {
+    width: 95%;
+  }
 }
 
 .Title {
